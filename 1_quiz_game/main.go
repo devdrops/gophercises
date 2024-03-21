@@ -18,8 +18,6 @@ func main() {
 	timeout := flag.Int("timeout", 30, "Timeout limit to give an answer, in seconds.")
 	flag.Parse()
 
-	timer := time.NewTimer(time.Duration(*timeout) * time.Second)
-
 	// Reading file
 	file, err := os.Open(*csvFile)
 	if err != nil {
@@ -30,6 +28,8 @@ func main() {
 	defer file.Close()
 
 	var totals, correct, wrong int
+
+	timer := time.NewTimer(time.Duration(*timeout) * time.Second)
 
 	// Iterate data
 	scanner := bufio.NewScanner(file)
